@@ -1,15 +1,18 @@
-#Sprout
+#Sprout PHP framework
 
-The goal of this framework is for it to be fast, efficient, and very light weight--with only the minimum amount of code loaded at runtime.
+The goal of this framework is for it to be fast, efficient, very light weight, well documented and easy to use.
 
-Some of the feature goals are:
+**THIS FRAMEWORK IS IN THE VERY BEGINNING STAGES OF DEVELOPMENT.** If you're looking for a fun development project, you're in luck.  If your looking to start building web applications, keep looking.
 
-##General
+##Development goals:
+Only the minimum amount of code needed to complete a request should be loaded at runtime.
+
+###General
 * Convention over configuration wherever possible with sensible defaults
 * Encourage DRY coding principles
 * Well-defined coding and documentation standards
 
-##Framework
+###Framework
 * Framework, app, and webroot can be independly stored anywhere on the drive
 * Namespace-based autoloading
 * Regular expression tokenized routing
@@ -24,14 +27,14 @@ Some of the feature goals are:
   - Generation of models and controllers, optionally with predefined actions and
     views, and database schema migrations
   - Database schema management through migrations
-  - Documentation generation
-  - Executing test
+  - Project documentation generation
+  - Running tests
   - User-defined tasks - possibly for release scripts etc.
 * RESTful API
 
-##Applications
+###Applications
 * Before and after callback options
-* Plain PHP view templates with alternate syntax PHP control structures and 
+* Plain PHP view templates with alternate syntax PHP control structures and
 * Really great HTML view helpers for building forms, etc.
 * Automatic minifying for HTML, CSS, and JS that can be disabled
 * View and asset caching
