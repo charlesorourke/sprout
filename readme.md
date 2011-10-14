@@ -16,25 +16,24 @@ Only the minimum amount of code needed to complete a request should be loaded at
 * Framework, app, and webroot can be independly stored anywhere on the drive
 * Namespace-based autoloading
 * Regular expression tokenized routing
-* Ajax-friendly routes for partials
+* Ajax-friendly routes for partials and non-html requests
 * Built-in options for User and Auth classes to support basic authentication
   - User-defined roles
   - Cached access tables
   - Simple access checks like $user->is('admin') and/or $user->can('edit_posts')
 * Built-in PHP ActiveRecord as the default ORM
 * Migration-based schema management
-* Command-line utility with executing application tasks and code generation
-  - Generation of models and controllers, optionally with predefined actions and
-    views, and database schema migrations
+* Command-line utility for executing application tasks and code generation
+  - Generation of models and controllers, optionally with predefined actions/views, database schema migrations, etc.
   - Database schema management through migrations
-  - Project documentation generation
-  - Running tests
+  - Project documentation generation with phpDocumentor
+  - Running tests with PHPUnit
   - User-defined tasks - possibly for release scripts etc.
 * RESTful API
 
 ###Applications
 * Before and after callback options
-* Plain PHP view templates with alternate syntax PHP control structures and
+* Plain PHP view templates with alternate syntax PHP control structures and automatic replacement and escaping of short open tags
 * Really great HTML view helpers for building forms, etc.
 * Automatic minifying for HTML, CSS, and JS that can be disabled
 * View and asset caching
