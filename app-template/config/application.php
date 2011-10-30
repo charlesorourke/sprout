@@ -8,7 +8,7 @@
 	// 'environment' => 'development',
 	// 'app_title' => 'Demo',
 	// 'app_basename' => 'demo',
-	// 'app_dir' => __DIR__,
+	'app_dir' => dirname(__DIR__),
 	// 'connections' => array(
 	// 	'development' => 'mysql://username:password@host/database'
 	// )

@@ -40,9 +40,21 @@ spl_autoload_register(function($class) {
 		foreach (explode('\\', $class) as $segment) {
 			array_push($segments, Inflector::underscore($segment));
 		}
-		$class_path = implode(DS, $segments);
-		require_once __DIR__ . DS . $class_path . '.php';
+		$class_path = __DIR__ . DS . implode(DS, $segments) . '.php';
 	} else {
-		exit('Attempting to autoload class: ' . $class);
+		$app_path = Config::get('app_dir');
+		$class = Inflector::underscore($class);
+
+		// If we can't autoload this via namespace, see if we can pull it in from one of the app's
+		// known directories.
+		if (stripos($class, 'controller') !== false) {
+			$class_path = $app_path . DS . 'controllers' . DS . $class . '.php';
+		} elseif (stripos($class, 'helper') !== false) {
+			$class_path = $app_path . DS . 'helpers' . DS . $class . '.php';
+		} else {
+			$class_path = $app_path . DS . 'models' . DS . $class . '.php';
+		}
 	}
+
+	if (file_exists($class_path)) require_once $class_path;
 });

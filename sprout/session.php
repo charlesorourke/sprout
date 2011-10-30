@@ -32,16 +32,20 @@ class Session {
 
 	/**
 	 * Start the session
+	 *
+	 * @return void
 	 */
-	public function start() {
+	public static function start() {
 		session_start();
 	}
 
 
 	/**
 	 * Destroy the session
+	 *
+	 * @return void
 	 */
-	public function destroy() {
+	public static function destroy() {
 		session_destroy();
 	}
 }

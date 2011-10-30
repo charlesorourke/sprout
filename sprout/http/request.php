@@ -204,7 +204,7 @@ class Request {
 
 		// Parse the path info portion of the URI and extract the correct path,
 		// query array, and formatted query_uri.
-		$path_parts = $this->parse_path($path_info);
+		$path_parts = $this->_parse_path($path_info);
 
 		// Path
 		$this->path = $path_parts['path'];
@@ -264,7 +264,7 @@ class Request {
 	 *    $_SERVER variables
 	 * @return array Associative array with path, query, and query_uri keys
 	 */
-	private function parse_path($path_info = null) {
+	private function _parse_path($path_info = null) {
 
 		$query = array();
 		$params = array();

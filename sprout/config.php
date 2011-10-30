@@ -150,7 +150,7 @@ class Config {
 		switch ($option) {
 			case 'app_basename':
 				self::${$option} = Inflector::underscore($value);
-				break;
+			break;
 
 			case 'app_dir':
 				if (file_exists(realpath($value))) {
@@ -158,7 +158,7 @@ class Config {
 				} else {
 					throw new Exception('app_dir ' . realpath($value) . ' does not exist.');
 				}
-				break;
+			break;
 
 			case 'webroot_dir':
 				if (file_exists(realpath($value))) {
@@ -166,7 +166,7 @@ class Config {
 				} else {
 					throw new Exception('webroot ' . realpath($value) . ' does not exist.');
 				}
-				break;
+			break;
 
 			case 'cache_dir':
 				if (file_exists(realpath($value)) && is_writable(realpath($value))) {
@@ -174,7 +174,7 @@ class Config {
 				} else {
 					throw new Exception('cache_dir ' . realpath($value) . ' is not writable or does not exist.');
 				}
-				break;
+			break;
 
 			case 'temp_dir':
 				if (file_exists(realpath($value)) && is_writable(realpath($value))) {
@@ -251,9 +251,7 @@ class Config {
 	public static function init(array $options = array()) {
 
 		// Initialize the configuration with Sprout defaults
-
 		self::$environment = 'development';
-
 
 		self::$app_dir = dirname(dirname(__DIR__)) . DS . 'app';
 		self::$webroot_dir = self::$app_dir . DS . 'webroot';

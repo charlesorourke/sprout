@@ -59,17 +59,17 @@ Router::connect('/', array(
 Router::connect('/login', array(
 	'controller' => 'auth',
 	'action' => 'login'
-));
+), 'login');
 
 Router::connect('/logout', array(
 	'controller' => 'auth',
 	'action' => 'logout'
-));
+), 'logout');
 
 Router::connect('/signup', array(
 	'controller' => 'auth',
 	'action' => 'signup'
-));
+), 'signup');
 
 Router::connect('/profile/:username', array(
 	'controller' => 'users',

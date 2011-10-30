@@ -54,11 +54,6 @@ class Route {
 	/**
 	 * Name by which the route can be referenced
 	 *
-	 * If no name is provided, the router will name the route. For routes with
-	 * an action and controller defined, [action]_[underscored controller] will
-	 * be used -- for example, edit_users or add_pages.  Otherwise, the pattern
-	 * will be assigned as the name.
-	 *
 	 * @var string
 	 */
 	public $name;
@@ -140,7 +135,7 @@ class Route {
 	 *
 	 * @var array
 	 */
-	private $default_patterns = array(
+	private $_default_patterns = array(
 		'controller' => '([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\-\x7f-\xff]+)',
 		'action' => '([a-zA-Z_\x7f-\xff][a-zA-Z0-9_\-\x7f-\xff]+)',
 		'id' => '([1-9][0-9]{0,9})',
@@ -178,19 +173,13 @@ class Route {
 		foreach ($matches['tokens'] as $token) {
 			if (isset($components[$token])) {
 				$token_pattern = $components[$token];
-			} elseif (isset($this->default_patterns[$token])) {
-				$token_pattern = $this->default_patterns[$token];
+			} elseif (isset($this->_default_patterns[$token])) {
+				$token_pattern = $this->_default_patterns[$token];
 			} else {
-				$token_pattern = $this->default_patterns['default'];
+				$token_pattern = $this->_default_patterns['default'];
 			}
 			// todo: Consider auto-wrapping token patterns in parentheses.
 			$regex_pattern = str_replace(":{$token}", "{$token_pattern}", $regex_pattern);
-		}
-
-		if (!isset($name) && isset($components['action']) && isset($components['controller'])) {
-			$name = Inflector::underscore($components['action'] . '_' . $components['controller']);
-		} elseif (!isset($name)) {
-			$name = $pattern;
 		}
 
 		$this->name = $name;

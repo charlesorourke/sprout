@@ -34,7 +34,7 @@ class Inflector {
 	/**
 	 * Words whose singular and plurarl forms are the same
 	 */
-	private static $uncountables = array(
+	private static $_uncountables = array(
 		'equipment',
 		'information',
 		'rice',
@@ -49,7 +49,7 @@ class Inflector {
 	/**
 	 * Words whose singular and plurarl forms are irregularly related
 	 */
-	private static $irregulars = array(
+	private static $_irregulars = array(
 		'person' => 'people',
 		'man' => 'men',
 		'child' => 'children',
@@ -88,13 +88,13 @@ class Inflector {
 
 		$lowercased_text = strtolower($text);
 
-		foreach (self::$uncountables as $uncountable) {
+		foreach (self::$_uncountables as $uncountable) {
 			if (substr($lowercased_text, (-1 * strlen($uncountable))) == $uncountable) {
 				return $text;
 			}
 		}
 
-		foreach (self::$irregulars as $plural => $singular) {
+		foreach (self::$_irregulars as $plural => $singular) {
 			if (preg_match('/(' . $plural . ')$/i', $text, $arr)) {
 				return preg_replace('/(' . $plural . ')$/i', substr($arr[0], 0, 1) . substr($singular, 1), $text);
 			}
@@ -145,13 +145,13 @@ class Inflector {
 		);
 
 		$lowercased_text = strtolower($text);
-		foreach (self::$uncountables as $uncountable) {
+		foreach (self::$_uncountables as $uncountable) {
 			if (substr($lowercased_text, (-1 * strlen($uncountable))) == $uncountable) {
 				return $text;
 			}
 		}
 
-		foreach (self::$irregulars as $singular => $plural) {
+		foreach (self::$_irregulars as $singular => $plural) {
 			if (preg_match('/(' . $plural . ')$/i', $text, $arr)) {
 				return preg_replace('/(' . $plural . ')$/i', substr($arr[0], 0, 1) . substr($singular, 1), $text);
 			}

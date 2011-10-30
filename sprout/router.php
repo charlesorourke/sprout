@@ -50,7 +50,7 @@ class Router {
 	 *
 	 * @var array
 	 */
-	private static $routes = array();
+	private static $_routes = array();
 
 
 	/**
@@ -63,9 +63,9 @@ class Router {
 	 */
 	public static function front_controller($front_controller_name = null) {
 		if (isset($front_controller_name) && strlen($front_controller_name) > 0) {
-			self::$defaults['front_controller'] = trim($front_controller_name);
+			self::$_defaults['front_controller'] = trim($front_controller_name);
 		}
-		return self::$defaults['front_controller'];
+		return self::$_defaults['front_controller'];
 	}
 
 
@@ -79,9 +79,9 @@ class Router {
 	 */
 	public static function default_action($action_name = null) {
 		if (isset($action_name) && strlen($action_name) > 0) {
-			self::$defaults['action'] = Inflector::underscore($action_name);
+			self::$_defaults['action'] = Inflector::underscore($action_name);
 		}
-		return self::$defaults['action'];
+		return self::$_defaults['action'];
 	}
 
 
@@ -99,9 +99,9 @@ class Router {
 			$controller_name = Inflector::controllerize($controller_name);
 			$controller_name = Inflector::underscore($controller_name);
 			$controller_name = str_replace('_controller', '', $controller_name);
-			self::$defaults['controller'] = $controller_name;
+			self::$_defaults['controller'] = $controller_name;
 		}
-		return self::$defaults['controller'];
+		return self::$_defaults['controller'];
 	}
 
 
@@ -113,9 +113,9 @@ class Router {
 	 */
 	public static function default_format($format_name = null) {
 		if (isset($format_name) && strlen($format_name) > 0) {
-			self::$defaults['format'] = $format_name;
+			self::$_defaults['format'] = $format_name;
 		}
-		return self::$defaults['format'];
+		return self::$_defaults['format'];
 	}
 
 
@@ -126,7 +126,10 @@ class Router {
 	 */
 	public static function connect($pattern, $components = array(), $name = null) {
 		$route = new Route($pattern, $components, $name);
-		self::$routes[$route->name] = $route;
+		self::$_routes[$pattern] = $route;
+		if ($route->name !== null) {
+			self::$_routes[$route->name] = $route;
+		}
 	}
 
 
@@ -144,7 +147,7 @@ class Router {
 	 * @return Route|null
 	 */
 	public static function match($path) {
-		self::verify_routes_exist();
+		self::_verify_routes_exist();
 		$matched_route = null;
 		$route_data = array();
 
@@ -153,14 +156,14 @@ class Router {
 			$path = substr($path, strlen(self::front_controller()));
 		}
 
-		if (isset(self::$routes[$path])) {
-			$matched_route = self::$routes[$path];
 		// Attempt to match the URI path to a route.  If the $path exactly matches a static route,
 		// something like, "/dashboard" for example, then skip the whole RegEx matching process.
 		// Otherwise, use the route's regex_pattern property to match via regulrar expressions.
+		if (isset(self::$_routes[$path])) {
+			$matched_route = self::$_routes[$path];
 			$route_data = $matched_route->components;
 		} else {
-			foreach (self::$routes as $route) {
+			foreach (self::$_routes as $route) {
 				$match_count = preg_match_all(
 					"/^{$route->regex_pattern}$/i", $path, $component_matches, PREG_SET_ORDER
 				);
@@ -193,7 +196,7 @@ class Router {
 		}
 
 		// Populate the route's params property
-		$matched_route->params = self::parse_route_params($route_data);
+		$matched_route->params = self::_parse_route_params($route_data);
 
 		return $matched_route;
 	}
@@ -212,7 +215,7 @@ class Router {
 	 *   * format => 'html' (default)
 	 * @return array
 	 */
-	private static function parse_route_params(array $route_data) {
+	private static function _parse_route_params(array $route_data) {
 		$params = array(
 			'controller' => self::default_controller(),
 			'action' => self::default_action(),
@@ -251,22 +254,21 @@ class Router {
 	 *
 	 * @return void
 	 */
-	private static function verify_routes_exist() {
+	private static function _verify_routes_exist() {
 		$default_patterns = array(
+			'/',
+			'/' . self::default_action() . ':format',
 			'/:controller:format',
 			'/:controller/:action:format',
 			'/:controller/:action/:id:format'
 		);
 
-		// Add a default homepage route if one does not exist
-		if (!isset(self::$routes['homepage'])) {
-			self::connect('/' . self::default_action() . ':format', array(), 'homepage');
-		}
-
-		// For each of the following route definitions, if they do not exist in the routes array,
-		// add them to the end as a default option.
+		// For each of the default route definitions, if they do not exist in the routes array, add
+		// them to the end as a default option.
 		foreach ($default_patterns as $route_pattern) {
-			self::connect($route_pattern);
+			if (!isset(self::$_routes[$route_pattern])) {
+				self::connect($route_pattern);
+			}
 		}
 	}
 
