@@ -1,29 +1,26 @@
 <?php
 /**
- * Copyright (c) 2011, David Mingos
+ * Copyright (c) 2011, Dave Mingos
  * All rights reserved.
- * 
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- * 
- * 1. Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
- * 
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions
+ *    and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of
+ *    conditions and the following disclaimer in the documentation and/or other materials provided
+ *    with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+ * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 namespace Sprout;
@@ -36,8 +33,8 @@ namespace Sprout;
  *  - an array of static and regular expression component definitions
  *  - (optionally), a name
  *
- * There are default regular expressions for :controller, :action, :id, and
- * :format but they can be overridden.
+ * There are default regular expressions for :controller, :action, :id, and :format but they can be
+ * overridden.
  *
  * $route = new Route('/', array(
  * 	'controller' => 'pages',
@@ -70,10 +67,9 @@ class Route {
 	/**
 	 * Human-readable routing pattern
 	 *
-	 * Pattern is a slash-delimited string containing static and tokenized
-	 * component keys defined in the $components property array. Static
-	 * components are plain text strings like, "store." Tokenized components
-	 * are defined with a semi-colon followed by the string component name,
+	 * Pattern is a slash-delimited string containing static and tokenized component keys defined in
+	 * the $components property array. Static components are plain text strings like, "store."
+	 * Tokenized components are defined with a semi-colon followed by the string component name,
 	 * ":controller" for example.
 	 *
 	 * The following are all valid patterns:
@@ -89,12 +85,11 @@ class Route {
 	/**
 	 * Associative array of static and tokenized components
 	 *
-	 * Pattern components can be defined with strings or regular expressions.
-	 * If not specified, the router will attempt to assign one of the default
-	 * component definitions.  If no controller or action can be determined, the
-	 * router will assign the values for default_controller and
+	 * Pattern components can be defined with strings or regular expressions. If not specified, the
+	 * router will attempt to assign one of the default component definitions.  If no controller or
+	 * action can be determined, the router will assign the values for default_controller and
 	 * default_action.
-	 * 
+	 *
 	 * Custom components are defined by regular expressions.
 	 *
 	 * array(
@@ -111,8 +106,8 @@ class Route {
 	/**
 	 * Associative array containing component values parsed out by Router#match
 	 *
-	 * When the router matches a route to a URI path, static and tokenized
-	 * component values will be extracted and stored in this array.
+	 * When the router matches a route to a URI path, static and tokenized component values will be
+	 * extracted and stored in this array.
 	 *
 	 * @var array
 	 */
@@ -133,8 +128,8 @@ class Route {
 	 *
 	 * Controller and action names:
 	 *  - Strings containing only letters, numbers, underscores and dashes
-	 *  - "Letters" are a-z, A-Z, and the bytes from 127 through 255 (0x7f-0xff)
-	 *    as defined by PHP.net for valid label names.
+	 *  - "Letters" are a-z, A-Z, and the bytes from 127 through 255 (0x7f-0xff) as defined by
+	 *     PHP.net for valid label names.
 	 *    http://www.php.net/manual/en/language.oop5.basic.php
 	 * IDs:
 	 *  - Numbers 1 through 9999999999
@@ -157,10 +152,9 @@ class Route {
 	/**
 	 * Initialize a new route object
 	 *
-	 * @todo Consider adding :format to the end of every route except for '/' 
+	 * @todo Consider adding :format to the end of every route except for '/'
 	 * @param string $pattern Forward slash-delimited URI pattern
-	 * @param array $components (optional) Static and tokenized component
-	 *    definitions
+	 * @param array $components (optional) Static and tokenized component definitions
 	 * @return void
 	 */
 	function __construct($pattern, array $components = array(), $name = null) {

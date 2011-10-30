@@ -1,29 +1,26 @@
 <?php
 /**
- * Copyright (c) 2011, David Mingos
+ * Copyright (c) 2011, Dave Mingos
  * All rights reserved.
- * 
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- * 
- * 1. Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
- * 
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
- * 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions
+ *    and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of
+ *    conditions and the following disclaimer in the documentation and/or other materials provided
+ *    with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+ * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 namespace Sprout;
@@ -38,9 +35,9 @@ class Router {
 	 *
 	 * @var array
 	 */
-	private static $defaults = array(
-		// Front controller could be set to index.php, default.php, or otherwise
-		// if mod_rewrite is not available.
+	private static $_defaults = array(
+		// Front controller could be set to index.php, default.php, or otherwise if mod_rewrite is
+		// not available.
 		'front_controller' => '',
 		'controller' => 'pages',
 		'action' => 'index',
@@ -59,8 +56,7 @@ class Router {
 	/**
 	 * Getter/setter for the front controller
 	 *
-	 * This can be set to index.php, default.php, or otherwise if mod_rewrite is
-	 * not available.
+	 * This can be set to index.php, default.php, or otherwise if mod_rewrite is not available.
 	 *
 	 * @param string (optional) The default front controller file name
 	 * @return string Default front controller file name
@@ -137,14 +133,12 @@ class Router {
 	/**
 	 * Return the first matching Route object
 	 *
-	 * The match function attempts to match the URI path to a Route object in
-	 * the $routes array.  If the URI path given exactly matches a static route,
-	 * something like, "/dashboard" for example, it will return the Route and
-	 * skip the process of matching via regular expression.
+	 * The match function attempts to match the URI path to a Route object in the routes array.  If
+	 * the URI path given exactly matches a static route, something like, "/dashboard" for example,
+	 * it will return the Route and skip the process of matching via regular expression.
 	 *
-	 * If no static route match exists, it will iterate through the $routes
-	 * array until it finds a regular expression match.  If no match can be
-	 * found, match returns false.
+	 * If no static route match exists, it will iterate through the routes array until it finds a
+	 * regular expression match.  If no match can be found, match returns false.
 	 *
 	 * @param string $path URI path to match
 	 * @return Route|null
@@ -159,12 +153,11 @@ class Router {
 			$path = substr($path, strlen(self::front_controller()));
 		}
 
-		// Attempt to match the URI path to a route.  If the $path exactly
-		// matches a static route, something like, "/dashboard" for example,
-		// then skip the whole RegEx matching process.  Otherwise, use the
-		// route's regex_pattern property to match via regulrar expressions.
 		if (isset(self::$routes[$path])) {
 			$matched_route = self::$routes[$path];
+		// Attempt to match the URI path to a route.  If the $path exactly matches a static route,
+		// something like, "/dashboard" for example, then skip the whole RegEx matching process.
+		// Otherwise, use the route's regex_pattern property to match via regulrar expressions.
 			$route_data = $matched_route->components;
 		} else {
 			foreach (self::$routes as $route) {
@@ -173,14 +166,13 @@ class Router {
 				);
 
 				if ($match_count > 0) {
-					// Replace regular expression component values with their
-					// parsed values.
+					// Replace regular expression component values with their parsed values.
 					preg_match_all('/:(?<tokens>[\w]+)+/', $route->pattern, $token_matches);
 					$token_matches = $token_matches['tokens'];
 					$component_matches = $component_matches[0];
 
-					// The first element in component_matches is always the full
-					// path match and we don't want that here so get rid of it.
+					// The first element in component_matches is always the full path match and we
+					// don't want that here so get rid of it.
 					array_shift($component_matches);
 
 					$token_values = array();
@@ -210,8 +202,8 @@ class Router {
 	/**
 	 * Populate a route's params property array with values from the URI path
 	 *
-	 * Token values are added to the $params property array.  Route params are
-	 * eventually merged into the Request objects params array.
+	 * Token values are added to the $params property array.  Route params are eventually merged
+	 * into the Request objects params array.
 	 *
 	 * @param array $route_data Associative array
 	 *   The $route_data array contains at least the following keys:
@@ -254,8 +246,8 @@ class Router {
 	/**
 	 * Ensure the routes array is not empty
 	 *
-	 * If the app developer hasn't set up any routes, the default route is added
-	 * to provide some basic MVC functionality.
+	 * If the app developer hasn't set up any routes, the default route is added to provide some
+	 * basic MVC functionality.
 	 *
 	 * @return void
 	 */
@@ -271,8 +263,8 @@ class Router {
 			self::connect('/' . self::default_action() . ':format', array(), 'homepage');
 		}
 
-		// For each of the following route definitions, if they do not exist in
-		// the routes array, add them to the end as a default option
+		// For each of the following route definitions, if they do not exist in the routes array,
+		// add them to the end as a default option.
 		foreach ($default_patterns as $route_pattern) {
 			self::connect($route_pattern);
 		}

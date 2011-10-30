@@ -1,29 +1,26 @@
 <?php
 /**
- * Copyright (c) 2011, David Mingos
+ * Copyright (c) 2011, Dave Mingos
  * All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without modification, are permitted
+ * provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
+ * 1. Redistributions of source code must retain the above copyright notice, this list of conditions
+ *    and the following disclaimer.
  *
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
+ * 2. Redistributions in binary form must reproduce the above copyright notice, this list of
+ *    conditions and the following disclaimer in the documentation and/or other materials provided
+ *    with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+ * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+ * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+ * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 namespace Sprout;
@@ -31,10 +28,10 @@ namespace Sprout;
 /**
 * Static class for managing configuration options
 *
-* The Config class defines properties for configuration options required by
-* Sprout. Developers can extend the required configuration with any number of
-* options required in their applications. Application configuration options will
-* be added to an associative array stored in the $options property.
+* The Config class defines properties for configuration options required by Sprout. Developers can
+* extend the required configuration with any number of options required in their applications.
+* Application configuration options will be added to an associative array stored in the $options
+* property.
 */
 class Config {
 
@@ -92,12 +89,10 @@ class Config {
 	/**
 	 * Path to your applications' webroot
 	 *
-	 * In development, this should be a subdirectory of your application
-	 * directory so that UI assets can be managed with a version control system
-	 * such as Git SCM.
+	 * In development, this should be a subdirectory of your application directory so that UI assets
+	 * can be managed with a version control system such as Git SCM.
 	 *
-	 * In production, the webroot should be outside of the webroot for greater
-	 * security.
+	 * In production, the webroot should be outside of the webroot for greater security.
 	 *
 	 * @var string
 	 */
@@ -187,14 +182,13 @@ class Config {
 				} else {
 					throw new Exception('temp_dir ' . realpath($value) . ' is not writable or does not exist.');
 				}
-				break;
+			break;
 
 			default:
-				// We don't want to set the options property here because it is
-				// used to store user-defined configuration options. If the app
-				// developer defines a config parameter called 'options' we will
-				// want to store it in the $options property, not as the options
-				// property itself.
+				// We don't want to set the options property here because it is used to store user-
+				// defined configuration options. If the app developer defines a config parameter
+				// called 'options' we will want to store it in the $options property, not as the
+				// options property itself.
 				if ($option !== 'options') {
 					self::${$option} = $value;
 				}
@@ -218,8 +212,7 @@ class Config {
 
 
 	/**
-	 * Take an array of user-defined options and populate the Config properties
-	 * and $options array.
+	 * Take an array of user-defined options and populate the Config properties and $options array.
 	 *
 	 * @param array $options An associative array of configuration parameters
 	 * @return void
@@ -233,9 +226,9 @@ class Config {
 		unset($properties['initialized']);
 		unset($properties['options']);
 
-		// Loop through the user-defined configuration options and test validity
-		// where applicable. Additional config options that are not config class
-		// properties will be stored in the options property.
+		// Loop through the user-defined configuration options and test validity where applicable.
+		// Additional config options that are not config class properties will be stored in the
+		// options property.
 		foreach ($options as $option => $value) {
 			if (array_key_exists($option, $properties)) {
 				self::set($option, $value);
@@ -243,8 +236,7 @@ class Config {
 			}
 		}
 
-		// For each of the remaining $options, add them to the self::$options
-		// array.
+		// For each of the remaining $options, add them to the self::$options array.
 		foreach ($options as $option => $value) {
 			self::$options[$option] = $value;
 		}
@@ -254,8 +246,7 @@ class Config {
 	/**
 	 * Initialize the configuration options and set some defaults
 	 *
-	 * @param array $options A user-defined associative array of configuration
-	 *   options
+	 * @param array $options A user-defined associative array of configuration options
 	 */
 	public static function init(array $options = array()) {
 
