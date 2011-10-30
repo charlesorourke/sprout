@@ -28,36 +28,30 @@ namespace Sprout;
 use \Sprout\HTTP\Request;
 
 /**
-* Dispatch a new HTTP requests
+* Dispatch new requests
 */
 class Dispatcher {
 
-	function dispatch() {
+	/**
+	 * Dispatch a new web application request
+	 *
+	 * Initiates a new request, executes the controller action and responds with the corresponding
+	 * view template rendered in the requested format.
+	 */
+	public static function dispatch() {
+		// Start the session so that it's ready to use everywhere within the application.
 		Session::start();
-		$request = new Request;
-		?>
-		<!DOCTYPE html>
-		<html lang="en">
-		<head>
-			<meta charset="utf-8">
-			<title>Sprout</title>
-		</head>
-		<body>
-			<h3>Request tests</h3>
-			<ul>
-				<li><a href="http://sprout.dev/">http://sprout.dev/</a></li>
-				<li><a href="http://sprout.dev/index">http://sprout.dev/index</a></li>
-				<li><a href="http://sprout.dev/index.html">http://sprout.dev/index.html</a></li>
-				<li><a href="http://sprout.dev/tasks">http://sprout.dev/tasks</a></li>
-				<li><a href="http://sprout.dev/tasks.json">http://sprout.dev/tasks.json</a></li>
-				<li><a href="http://sprout.dev/store/products/ABC-111222333444">http://sprout.dev/store/products/ABC-111222333444</a></li>
-				<li><a href="http://sprout.dev/store/products/ABC-111222333444.partial">http://sprout.dev/store/products/ABC-111222333444.partial</a></li>
-				<li><a href="http://sprout.dev/user-accounts/edit_profile/1234/key:value/test:a,b,c,d,e/test:f,g/foo:bar?foo=baz">http://sprout.dev/user-accounts/edit_profile/1234/key:value/test:a,b,c,d,e/test:f,g/foo:bar?foo=baz</a></li>
-			</ul>
 
-			<pre>Request = <?=print_r(get_object_vars($request), true)?></pre>
-		</body>
-		</html>
-		<?php
+		// Initialize a new request object.
+		$request = new Request;
+
+		// Verify that the controller class exists.
+		$controller = Controller::init($request->params['controller'], $request);
+
+		// Populate $controller->data with the action data and any filters defined.
+		$controller->run_action($request->params['action']);
+
+		// Build out the Response and send it back to the client.
+		$controller->send_response();
 	}
 }

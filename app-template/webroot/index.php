@@ -4,6 +4,6 @@
  * All rights reserved.
 */
 
-require_once realpath('../bootstrap.php');
+require_once realpath('../config/bootstrap.php');
 
 \Sprout\Dispatcher::dispatch();

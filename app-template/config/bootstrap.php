@@ -9,5 +9,5 @@
 require_once realpath('../../framework.php');
 
 // todo: It would be nice for Sprout to load all config files automatically.
-require_once 'config/application.php';
-require_once 'config/routes.php';
+require_once 'application.php';
+require_once 'routes.php';
