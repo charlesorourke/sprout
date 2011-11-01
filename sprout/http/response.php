@@ -240,8 +240,8 @@ class Response {
 			$this->content_type = $this->_mime_type['txt'];
 		}
 
-		if (is_array($type) && count($type) > 0) {
-			$this->content_type = $type[0];
+		if (is_array($this->content_type) && count($this->content_type) > 0) {
+			$this->content_type = $this->content_type[0];
 		}
 
 		header('Content-type: '. $this->content_type);
