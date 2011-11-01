@@ -169,6 +169,10 @@ class Config {
 			break;
 
 			case 'cache_dir':
+				if (!file_exists(realpath($value)) && is_writable(dirname($value))) {
+					mkdir($value);
+				}
+
 				if (file_exists(realpath($value)) && is_writable(realpath($value))) {
 					self::${$option} = realpath($value);
 				} else {
@@ -255,7 +259,7 @@ class Config {
 
 		self::$app_dir = dirname(dirname(__DIR__)) . DS . 'app';
 		self::$webroot_dir = self::$app_dir . DS . 'webroot';
-		self::$cache_dir = self::$webroot_dir . DS . 'cache';
+		self::$cache_dir = self::$app_dir . DS . 'cache';
 		self::$temp_dir = sys_get_temp_dir();
 
 		self::$app_basename = Inflector::underscore(basename(self::$app_dir));
