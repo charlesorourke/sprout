@@ -1,0 +1,10 @@
+# Writable directories
+*/cache/*
+*/temp/*
+*/logs/*
+
+# OS generated files
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
