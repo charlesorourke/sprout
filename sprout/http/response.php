@@ -67,7 +67,7 @@ class Response {
 	 *
 	 * @var string
 	 */
-	public $charset = 'utf8';
+	public $charset = 'utf-8';
 
 
 	/**
@@ -244,6 +244,6 @@ class Response {
 			$this->content_type = $this->content_type[0];
 		}
 
-		header('Content-type: '. $this->content_type);
+		header('Content-type: '. $this->content_type . '; charset=' . $this->charset);
 	}
 }
