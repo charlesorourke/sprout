@@ -87,8 +87,8 @@ class View {
 
 		// If the format requested doesn't have a built-in data handler and the view template does
 		// not exist, throw an exception.
-		if (!in_array($this->format, $this->_data_formats) && !file_exists($this->_full_path())) {
-			throw new Exception('View template ' . $this->_full_path() . ' does not exist.');
+		if (!in_array($this->format, $this->_data_formats) && !file_exists($this->_template_path())) {
+			throw new Exception('View template ' . $this->_template_path() . ' does not exist.');
 		}
 	}
 
@@ -140,6 +140,8 @@ class View {
 	 * Renders data into a view template
 	 *
 	 * Render takes one parameter, an associative array of data and renders it into a view template.
+	 * PHP short tags in view templates are qutomatically converted to fully escaped PHP echo
+	 * statements before being parsed by PHP.
 	 *
 	 * @param array $data Associative array of data
 	 * @return string
@@ -158,11 +160,13 @@ class View {
 		if (in_array($this->format, $this->_data_formats)) {
 			$content = Serializer::serialize($data, $this->format);
 		} else {
+			$cached_template = $this->_cached_template_path();
+
 			// Start output buffering.
 			ob_start();
 
 			// Include the view template.
-			require_once $this->_full_path();
+			require_once $cached_template;
 
 			// End output buffering and store the current buffer.
 			$content = ob_get_clean();
@@ -236,7 +240,64 @@ class View {
 	 *
 	 * @return string
 	 */
-	private function _full_path() {
+	private function _template_path() {
 		return Config::get('app_dir') . DS . 'views' . DS . $this->folder . DS . $this->template;
+	}
+
+
+	/**
+	 * Returns the path from root for the current view template's the cache file
+	 *
+	 * If the template's cache file has not been created yet, it is created here. Once the cached
+	 * template exists, its path is returned. Templates are created for each modification of the
+	 * corresponding view. Every time a template is cached, expired caches for that template are
+	 * removed.
+	 *
+	 * Before a view template is cached, short PHP open tags are repaced with full PHP open tags and
+	 * short echo tags are replaced with PHP echo statements escaped with $this->escape(). This
+	 * enables the use of PHP's short tag syntax even if short_open_tag is off in the server's
+	 * php.ini, as it should be for greater security. PHP short echo tags echoing $this->* are not
+	 * automatically escaped so to not interfere with helper functions that return markup.
+	 *
+	 * @uses Inflector::underscore
+	 * @uses View::_template_path
+	 * @see View::render
+	 * @return string
+	 */
+	private function _cached_template_path() {
+		$cache_dir = Config::get('cache_dir');
+		$stats = stat($this->_template_path());
+
+		// $template: folder_template_file_format
+		$template = $this->folder . '_' . substr($this->template, 0, strlen($this->template) - 4);
+		$template = Inflector::underscore($template);
+
+		// $template_path: /path/to/cache/folder_template_file_format_timestamp_size.php
+		$template_path = $cache_dir . DS . "{$template}_{$stats['mtime']}_{$stats['size']}.php";
+
+		// Create the cache file for the current modification of the view if doesn' exist yet.
+		if (!file_exists($template_path)) {
+
+			// Define patterns to replace php short tags with php tags and short echo tags with
+			// escaped php echo tags.
+			$patterns = array(
+				'/\<\?=\s*\$this->(.+?)\s*;?\s*\?>/msx' => '<? echo $this->$1; ?>',
+				'/\<\?=\s*(.+?)\s*;?\s*\?>/msx' => '<? echo $this->escape($1); ?>',
+				'/\<\?(php)?\s*(.+?)\s*(;)?\s*\?>/msx' => '<?php $2$3 ?>'
+			);
+			$contents = file_get_contents($this->_template_path());
+			$contents = preg_replace(array_keys($patterns), array_values($patterns), $contents);
+
+			// Once the new template cache file is written, remove expired template caches.
+			if (file_put_contents($template_path, $contents) !== false) {
+				foreach (glob("{$cache_dir}/{$template}_*.php") as $expired_template_path) {
+					if ($expired_template_path !== $template_path) {
+						unlink($expired_template_path);
+					}
+				}
+			}
+		}
+
+		return $template_path;
 	}
 }
