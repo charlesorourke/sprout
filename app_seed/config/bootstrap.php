@@ -4,6 +4,8 @@
  * All rights reserved.
 */
 
+require_once 'FirePHPCore/fb.php';
+
 // This is the full path to framework.php
 // require_once '/frameworks/sprout/framework.php';
 require_once realpath('../../framework.php');
