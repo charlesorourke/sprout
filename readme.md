@@ -8,7 +8,7 @@ The goal of this framework is for it to be fast, efficient, very light weight, w
 Only the minimum amount of code needed to complete a request should be loaded at runtime.
 
 ###General
-* Convention over configuration wherever possible with sensible defaults
+* Convention over configuration with sensible defaults
 * Encourage DRY coding principles
 * Well-defined coding and documentation standards
 
@@ -26,8 +26,8 @@ Only the minimum amount of code needed to complete a request should be loaded at
 * Command-line utility for executing application tasks and code generation
   - Generation of models and controllers, optionally with predefined actions/views, database schema migrations, etc.
   - Database schema management through migrations
-  - Project documentation generation with phpDocumentor
-  - Running tests with PHPUnit
+  - Project documentation generation
+  - Running tests
   - User-defined tasks - possibly for release scripts etc.
 * RESTful API
 
