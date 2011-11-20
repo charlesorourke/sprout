@@ -4,6 +4,7 @@
  * All rights reserved.
 */
 
-require_once realpath('../config/application.php');
+use \Sprout\Environment;
 
-\Sprout\Dispatcher::dispatch();
+Environment::config(array(
+));

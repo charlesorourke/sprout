@@ -241,7 +241,7 @@ class View {
 	 * @return string
 	 */
 	private function _template_path() {
-		return Config::get('app_dir') . DS . 'views' . DS . $this->folder . DS . $this->template;
+		return Application::get('path') . DS . 'views' . DS . $this->folder . DS . $this->template;
 	}
 
 
@@ -265,7 +265,7 @@ class View {
 	 * @return string
 	 */
 	private function _cached_template_path() {
-		$cache_dir = Config::get('cache_dir');
+		$cache_dir = Application::get('cache_dir');
 		$stats = stat($this->_template_path());
 
 		// $template: folder_template_file_format
