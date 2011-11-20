@@ -32,7 +32,6 @@ if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50300) {
 define('DS', DIRECTORY_SEPARATOR);
 
 require_once 'sprout' . DS . 'inflector.php';
-require_once 'bootstrap.php';
 
 /**
  * Autoloader for all Sprout framework classes
