@@ -57,8 +57,8 @@ class XMLSerializer extends Serializer {
 		self::$_writer->endDocument();
 		$xml = self::$_writer->outputMemory(true);
 
-		// The XML instruction may optionally be left off.  This is useful when concatenating
-		// several XML strings together for example.
+		// The XML instruction may optionally be left off. This is useful when concatenating several
+		// XML strings together for example.
 		if ($skip_instruct == true) {
 			$xml = preg_replace('/<\?xml version.*?\?>/', '', $xml);
 		}

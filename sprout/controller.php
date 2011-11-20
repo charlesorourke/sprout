@@ -117,8 +117,8 @@ class Controller {
 			throw new Exception($controller_class . ' does not exist.');
 		}
 
-		// The controller class exist.  Create an instance and set up property aliases of the
-		// current request's controller name, action name, format, and params array for convenience.
+		// The controller class exist. Create an instance and set up property aliases of the current
+		// request's controller name, action name, format, and params array for convenience.
 		$controller = new $controller_class;
 		$controller->request = &$request;
 		$controller->controller_name = &$request->params['controller'];
@@ -160,9 +160,9 @@ class Controller {
 		$action = $this->action_name;
 		$action_data = $this->$action();
 
-		// Set $this->data to the associative array of data elements returned by the action.  If the
+		// Set $this->data to the associative array of data elements returned by the action. If the
 		// action sets data elements directly or if no data is required by the view, $action_data
-		// may be null.  If $action_data is empty or not an array, this step is skipped.
+		// may be null. If $action_data is empty or not an array, this step is skipped.
 		if (!empty($action_data) && is_array($action_data)) {
 			$this->data = array_merge($this->data, $action_data);
 		}
@@ -170,7 +170,7 @@ class Controller {
 		// Run before_render callback methods.
 		$this->_run_filters('before_render');
 
-		// Set the content property of the controller to the rendered template content.  The content
+		// Set the content property of the controller to the rendered template content. The content
 		// property may be modified after the action has finished processing through after_filters.
 		$this->content = $this->view->render($this->data);
 
@@ -189,7 +189,7 @@ class Controller {
 	 */
 	public function send_response() {
 		// If the response content type has not yet been specified, try to assign one based on known
-		// extensions/formats.  If the content type cannot be determined by set_content_type, the
+		// extensions/formats. If the content type cannot be determined by set_content_type, the
 		// determination of content type is done by the web server.
 		if (!isset($this->response->content_type)) {
 			$this->response->set_mime_type($this->format);

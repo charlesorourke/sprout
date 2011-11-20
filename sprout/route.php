@@ -81,7 +81,7 @@ class Route {
 	 * Associative array of static and tokenized components
 	 *
 	 * Pattern components can be defined with strings or regular expressions. If not specified, the
-	 * router will attempt to assign one of the default component definitions.  If no controller or
+	 * router will attempt to assign one of the default component definitions. If no controller or
 	 * action can be determined, the router will assign the values for default_controller and
 	 * default_action.
 	 *

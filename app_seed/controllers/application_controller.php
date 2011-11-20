@@ -8,8 +8,8 @@
 * Base class of all controllers in your application.
 *
 * ApplicationController is an ideal place to define methods for implementing logic of application
-* scope.  ApplicationController methods are often used for before_Filters, before_render filters,
-* and after_filters.  Filter methods only applicable to one particular controller should be defined
+* scope. ApplicationController methods are often used for before_Filters, before_render filters, and
+* after_filters. Filter methods only applicable to one particular controller should be defined
 * within that controller.
 *
 * Filter methods defined in ApplicationController must have protected or public visibility.

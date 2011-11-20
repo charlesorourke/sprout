@@ -136,12 +136,12 @@ class Router {
 	/**
 	 * Return the first matching Route object
 	 *
-	 * The match function attempts to match the URI path to a Route object in the routes array.  If
+	 * The match function attempts to match the URI path to a Route object in the routes array. If
 	 * the URI path given exactly matches a static route, something like, "/dashboard" for example,
 	 * it will return the Route and skip the process of matching via regular expression.
 	 *
 	 * If no static route match exists, it will iterate through the routes array until it finds a
-	 * regular expression match.  If no match can be found, match returns false.
+	 * regular expression match. If no match can be found, match returns false.
 	 *
 	 * @param string $path URI path to match
 	 * @return Route|null
@@ -156,7 +156,7 @@ class Router {
 			$path = substr($path, strlen(self::front_controller()));
 		}
 
-		// Attempt to match the URI path to a route.  If the $path exactly matches a static route,
+		// Attempt to match the URI path to a route. If the $path exactly matches a static route,
 		// something like, "/dashboard" for example, then skip the whole RegEx matching process.
 		// Otherwise, use the route's regex_pattern property to match via regulrar expressions.
 		if (isset(self::$_routes[$path])) {
@@ -205,8 +205,8 @@ class Router {
 	/**
 	 * Populate a route's params property array with values from the URI path
 	 *
-	 * Token values are added to the $params property array.  Route params are eventually merged
-	 * into the Request objects params array.
+	 * Token values are added to the $params property array. Route params are eventually merged into
+	 * the Request objects params array.
 	 *
 	 * @param array $route_data Associative array
 	 *   The $route_data array contains at least the following keys:

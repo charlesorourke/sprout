@@ -2,7 +2,7 @@
 
 The goal of this framework is for it to be fast, efficient, very light weight, well documented and easy to use.
 
-**THIS FRAMEWORK IS IN THE VERY BEGINNING STAGES OF DEVELOPMENT.** If you're looking for a fun development project, you're in luck.  If your looking to start building web applications, keep looking.
+**THIS FRAMEWORK IS IN THE VERY BEGINNING STAGES OF DEVELOPMENT.** If you're looking for a fun development project, you're in luck. If your looking to start building web applications, keep looking.
 
 ##Development goals:
 Only the minimum amount of code needed to complete a request should be loaded at runtime.
@@ -13,7 +13,7 @@ Only the minimum amount of code needed to complete a request should be loaded at
 * Well-defined coding and documentation standards
 
 ###Framework
-* Framework, app, and webroot can be independly stored anywhere on the drive
+* Framework, app, and webroot can be independently stored anywhere on the drive
 * Namespace-based autoloading
 * Regular expression tokenized routing
 * Ajax-friendly routes for partials and non-html requests

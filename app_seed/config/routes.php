@@ -9,26 +9,23 @@ use \Sprout\Router;
 /**
  * Configuration file for all routing patterns in your application
  *
- * Routes are defined with a pattern at minimum and in most cases, and array of
- * route component definitions.  Route patterns are slash-delimited strings with
- * components tokenized with a preceding semicolon (:) character.  Tokenized
- * route components should be defined with a regular expression in the second
- * parameter array.  If no component definition is provided, a very generic
+ * Routes are defined with a pattern at minimum and in most cases, and array of route component
+ * definitions. Route patterns are slash-delimited strings with components tokenized with a
+ * preceding semicolon (:) character. Tokenized route components should be defined with a regular
+ * expression in the second parameter array. If no component definition is provided, a very generic
  * default one will be used.
  *
- * Tokenized route components and their values are added to the $request->params
- * array. If conflicting query string parameters or formatted key:value URI
- * parameters exist, tokenized route components will take precedence.
+ * Tokenized route components and their values are added to the $request->params array. If
+ * conflicting query string parameters or formatted key:value URI parameters exist, tokenized route
+ * components will take precedence.
  *
- * Routes are prioritized in the order they are defined.  Connect your routes in
- * order of specificity with the most generic default route last.
+ * Routes are prioritized in the order they are defined. Connect your routes in order of specificity
+ * with the most generic default route last.
  *
- * The one exception to the priority rule is the home route ('/'). Because this
- * route contains only static segments and is likely to be a high traffic route,
- * it is a good idea to make it the first connection so that it is always the
- * first match attempted.  Routes with only static segments skip component
- * matching via regular expressions altogether.  Fast as RegEx is, static string
- * comparison is faster.
+ * The one exception to the priority rule is the home route ('/'). Because this route contains only
+ * static segments and is likely to be a high traffic route, it is a good idea to make it the first
+ * connection so that it is always the first match attempted. Routes with only static segments skip
+ * component matching via regular expressions altogether.
  *
  * Some example route definitions:
  *
@@ -39,7 +36,7 @@ use \Sprout\Router;
  *  - http://www.regular-expressions.info/reference.html
  */
 
-// Unless set here, 'front_controller' will be empty.  This can be set to index.php, default.php, or
+// Unless set here, 'front_controller' will be empty. This can be set to index.php, default.php, or
 // otherwise for servers where mod_rewrite is not available.
 // Router::front_controller('default.php');
 

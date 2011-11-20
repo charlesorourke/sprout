@@ -26,13 +26,12 @@
 namespace Sprout;
 
 /**
- * Utility methods for manipulating the word delimiters, singularity and case of
- * strings.
+ * Utility methods for manipulating the word delimiters, singularity and case of strings.
  */
 class Inflector {
 
 	/**
-	 * Words whose singular and plurarl forms are the same
+	 * Words whose singular and plural forms are the same
 	 */
 	private static $_uncountables = array(
 		'equipment',
@@ -47,7 +46,7 @@ class Inflector {
 
 
 	/**
-	 * Words whose singular and plurarl forms are irregularly related
+	 * Words whose singular and plural forms are irregularly related
 	 */
 	private static $_irregulars = array(
 		'person' => 'people',
@@ -182,13 +181,13 @@ class Inflector {
 	/**
 	* Converts an underscored or CamelCase string into a English phrase.
 	*
-	* The titleize function converts a string like "WelcomePage", "welcome_page"
-	* or  "welcome page" to this "Welcome Page". If second parameter is set to
-	* 'first' it will only capitalize the first character of the title.
+	* The titleize function converts a string like "WelcomePage", "welcome_page" or "welcome page"
+	* to this "Welcome Page". If second parameter is set to "first" it will only capitalize the
+	* first character of the title.
 	*
 	* @param string $text Text to format as tile
-	* @param string $uppercase If set to 'first' titleize will only uppercase
-	*    the first character. Otherwise all words will be capitalized.
+	* @param string $uppercase If set to 'first' titleize will only uppercase the first character.
+	*    Otherwise all words will be capitalized.
 	* @return string $text formatted as title
 	*/
 	static function titleize($text, $uppercase = '') {
@@ -200,11 +199,9 @@ class Inflector {
 	/**
 	* Gets the CamelCased form of $text.
 	*
-	* Converts a phrase like "send_email" to "SendEmail". It will remove non-
-	* alphanumeric character from $text, so "who's online" will be converted to
-	* "WhoSOnline"
+	* Converts a phrase like "send_email" to "SendEmail". It will remove non-alphanumeric character
+	* from $text, so "who's online" will be converted to "WhoSOnline"
 	*
-	* @see variablize
 	* @param string $text Text to convert to camel case
 	* @return string UpperCamelCasedText
 	*/
@@ -257,9 +254,9 @@ class Inflector {
 	/**
 	* Returns a human-readable version of $text.
 	*
-	* Returns a human-readable version of $text by replacing underscores with
-	* spaces and by upper-casing the initial character by default. If you need
-	* to uppercase all words, pass in all' as the second parameter.
+	* Returns a human-readable version of $text by replacing underscores with spaces and by upper-
+	* casing the initial character by default. If you need to uppercase all words, pass in all' as
+	* the second parameter.
 	*
 	* @param string $text String to "humanize"
 	* @param string $uppercase If set to 'all' it will uppercase all words.
@@ -274,8 +271,8 @@ class Inflector {
 	/**
 	* Converts a class name to its table name.
 	*
-	* Returns the lowercased, underscored, plurarl version of a word.  Converts
-	* "Person" to "people" and "Thing" to "things" for example.
+	* Returns the lowercased, underscored, plural version of a word. For example, tableize converts
+	* "Person" to "people" and "Thing" to "things".
 	*
 	* @see classify
 	* @param string $class_name Class name for getting related table_name.
@@ -289,8 +286,8 @@ class Inflector {
 	/**
 	* Converts a table name to its class name
 	*
-	* Takes the CamelCased, singular version of a word.  Converts "people" to
-	* "Person" and "things" to "Thing".
+	* Takes the CamelCased, singular version of a word. Converts "people" to "Person" and "things"
+	* to "Thing".
 	*
 	* @see tableize
 	* @param string $table_name Table name for getting related ClassName.
@@ -367,8 +364,8 @@ class Inflector {
 	/**
 	* Formats a string for use as a URL
 	*
-	* Converts any "CamelCased" or "ordinary Phrase" into a "dashed-phrase" and
-	* replaces accented characters their unaccented equivalents.
+	* Converts any "CamelCased" or "ordinary Phrase" into a "dashed-phrase" and replaces accented
+	* characters their unaccented equivalents.
 	*
 	* @param string $text Text to underscore
 	* @return string URL formatted version of $text

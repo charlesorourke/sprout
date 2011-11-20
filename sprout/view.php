@@ -97,7 +97,7 @@ class View {
 	 * Getter magic method
 	 *
 	 * Checks to see if the requested property has an method of the same name and if so, utilizes it
-	 * to return its value.  Otherwise, it returns the property's value as expected.
+	 * to return its value. Otherwise, it returns the property's value as expected.
 	 *
 	 * @param string $varname The property requested
 	 * @return mixed The property value
@@ -121,7 +121,7 @@ class View {
 	 * Setter magic method
 	 *
 	 * Checks to see if the property being set has a method of the same name for setting its value
-	 * and if so, uses it to set the value.  Otherwise, it sets the property as expected.
+	 * and if so, uses it to set the value. Otherwise, it sets the property as expected.
 	 *
 	 * @param string $varname The name of the variable being set
 	 * @param mixed $value The value to set
@@ -140,7 +140,7 @@ class View {
 	 * Renders data into a view template
 	 *
 	 * Render takes one parameter, an associative array of data and renders it into a view template.
-	 * PHP short tags in view templates are qutomatically converted to fully escaped PHP echo
+	 * PHP short tags in view templates are automatically converted to fully escaped PHP echo
 	 * statements before being parsed by PHP.
 	 *
 	 * @param array $data Associative array of data
@@ -253,8 +253,8 @@ class View {
 	 * corresponding view. Every time a template is cached, expired caches for that template are
 	 * removed.
 	 *
-	 * Before a view template is cached, short PHP open tags are repaced with full PHP open tags and
-	 * short echo tags are replaced with PHP echo statements escaped with $this->escape(). This
+	 * Before a view template is cached, short PHP open tags are replaced with full PHP open tags
+	 * and short echo tags are replaced with PHP echo statements escaped with $this->escape(). This
 	 * enables the use of PHP's short tag syntax even if short_open_tag is off in the server's
 	 * php.ini, as it should be for greater security. PHP short echo tags echoing $this->* are not
 	 * automatically escaped so to not interfere with helper functions that return markup.
