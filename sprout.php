@@ -31,7 +31,7 @@ if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50300) {
 
 define('DS', DIRECTORY_SEPARATOR);
 
-require_once 'sprout' . DS . 'inflector.php';
+require_once 'lib' . DS . 'sprout' . DS . 'inflector.php';
 
 /**
  * Autoloader for all Sprout framework classes
@@ -42,7 +42,7 @@ spl_autoload_register(function($class) {
 		foreach (explode('\\', $class) as $segment) {
 			array_push($segments, Inflector::underscore($segment));
 		}
-		$class_path = __DIR__ . DS . implode(DS, $segments) . '.php';
+		$class_path = __DIR__ . DS . 'lib' . DS . implode(DS, $segments) . '.php';
 	} else {
 		$app_path = Application::get('path');
 		$class = Inflector::underscore($class);
