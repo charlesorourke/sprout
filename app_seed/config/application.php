@@ -54,3 +54,9 @@ Application::config(array(
 // out of the box but you can set up custom routes to make your application's URLs more easily
 // understood by humans as well as search engines.
 require_once 'routes.php';
+
+
+// Sprout correctly handles some of the more common irregular plurals (person to people, child to
+// children, etc.) and uncountable words (fish, sheep, etc.) but you can extend the lists of words
+// that are uncountable or have irregular plural forms in inflections.php.
+require_once 'inflections.php';

@@ -34,14 +34,39 @@ class Inflector {
 	 * Words whose singular and plural forms are the same
 	 */
 	private static $_uncountables = array(
+		'beef',
+		'cotton',
+		'data',
+		'deer',
+		'electricity',
+		'entertainment',
 		'equipment',
-		'information',
-		'rice',
-		'money',
-		'species',
-		'series',
+		'fiction',
 		'fish',
-		'sheep'
+		'flour',
+		'furniture',
+		'gold',
+		'happiness',
+		'homework',
+		'ice',
+		'information',
+		'knowledge',
+		'literature',
+		'means',
+		'milk',
+		'money',
+		'music',
+		'offspring',
+		'pork',
+		'rice',
+		'series',
+		'sheep',
+		'species',
+		'sunshine',
+		'tennis',
+		'thunder',
+		'traffic',
+		'weather'
 	);
 
 
@@ -49,12 +74,77 @@ class Inflector {
 	 * Words whose singular and plural forms are irregularly related
 	 */
 	private static $_irregulars = array(
-		'person' => 'people',
-		'man' => 'men',
+		'alumnus' => 'alumni',
+		'analysis' => 'analyses',
+		'appendix' => 'appendices',
+		'axis' => 'axes',
+		'bacterium' => 'bacteria',
+		'basis' => 'bases',
+		'cactus' => 'cacti',
 		'child' => 'children',
+		'corpus' => 'corpora',
+		'crisis' => 'crises',
+		'criterion' => 'criteria',
+		'curriculum' => 'curricula',
+		'datum' => 'data',
+		'diagnosis' => 'diagnoses',
+		'ellipsis' => 'ellipses',
+		'foot' => 'feet',
+		'genus' => 'genera',
+		'goose' => 'geese',
+		'hypothesis' => 'hypotheses',
+		'louse' => 'lice',
+		'man' => 'men',
+		'medium' => 'media',
+		'memorandum' => 'memoranda',
+		'mouse' => 'mice',
+		'move' => 'moves',
+		'nebula' => 'nebulae',
+		'nucleus' => 'nuclei',
+		'oasis' => 'oases',
+		'ox' => 'oxen',
+		'paralysis' => 'paralyses',
+		'parenthesis' => 'parentheses',
+		'person' => 'people',
+		'phenomenon' => 'phenomena',
+		'radius' => 'radii',
 		'sex' => 'sexes',
-		'move' => 'moves'
+		'stimulus' => 'stimuli',
+		'stratum' => 'strata',
+		'synopsis' => 'synopses',
+		'synthesis' => 'syntheses',
+		'thesis' => 'theses',
+		'tooth' => 'teeth',
+		'vertebra' => 'vertebrae',
+		'vita' => 'vitae',
+		'woman' => 'women'
 	);
+
+
+	/**
+	 * Extend the list of uncountables
+	 *
+	 * @param array $uncountables An array of uncountable words
+	 * @return void
+	 */
+	public function uncountables(array $uncountables) {
+		foreach ($uncountables as $word) {
+			if (!in_array($word, self::$_uncountables)) {
+				self::$_uncountables[] = $word;
+			}
+		}
+	}
+
+
+	/**
+	 * Extend the list of irregular plurals
+	 *
+	 * @param array $relationships An associative array of singular => plural word relationships
+	 * @return void
+	 */
+	public function irregulars(array $relationships) {
+		self::$_irregulars = $relationships + self::$_irregulars;
+	}
 
 
 	/**
