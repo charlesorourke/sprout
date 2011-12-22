@@ -226,11 +226,8 @@ class Router {
 			$key = Inflector::underscore($key);
 
 			switch ($key) {
-				case 'controller':
-					$value = Inflector::underscore(Inflector::pluralize($value));
-				break;
-
 				case 'action':
+				case 'controller':
 					$value = Inflector::underscore($value);
 				break;
 
