@@ -88,14 +88,6 @@ class Controller {
 
 
 	/**
-	 * Alias of the current requested format
-	 *
-	 * @var string
-	 **/
-	protected $format;
-
-
-	/**
 	 * Alias of the current request params
 	 *
 	 * @var string
@@ -121,15 +113,14 @@ class Controller {
 		// request's controller name, action name, format, and params array for convenience.
 		$controller = new $controller_class;
 		$controller->request = &$request;
+		$controller->params = &$request->params;
 		$controller->controller_name = &$request->params['controller'];
 		$controller->action_name = &$request->params['action'];
-		$controller->format = &$request->params['format'];
-		$controller->params = &$request->params;
 
 		// Set the default view template based on route params - this can be overridden in the
 		// controller action by setting $this->view->template = 'some_other_template.ext'; with .ext
 		// being optional.
-		$view_template = $controller->action_name . '.' . $controller->format;
+		$view_template = $controller->action_name . '.' . $controller->params['format'];
 		$controller->view = new View($controller->controller_name, $view_template);
 
 		// Create a new response object here so that headers can be set in the action if needed.
@@ -192,7 +183,7 @@ class Controller {
 		// extensions/formats. If the content type cannot be determined by set_content_type, the
 		// determination of content type is done by the web server.
 		if (!isset($this->response->content_type)) {
-			$this->response->set_mime_type($this->format);
+			$this->response->set_mime_type($this->params['format']);
 		}
 
 		if (!empty($this->content)) {
