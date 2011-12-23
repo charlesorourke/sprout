@@ -231,7 +231,11 @@ class View {
 
 		$filename = Inflector::underscore(str_replace('.' . $this->format, '', $filename));
 
-		return "{$filename}.{$this->format}.php";
+		// If the view format requested is the "bare" template markup, separate from the layout, use
+		// "html" as the value for format in the filename.
+		$format = ($this->format == 'bare') ? 'html' : $this->format;
+
+		return "{$filename}.{$format}.php";
 	}
 
 

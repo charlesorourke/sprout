@@ -94,6 +94,7 @@ class Response {
 		'aiff' => array('audio/x-aiff', 'audio/aiff'),
 		'au' => 'audio/x-au',
 		'avi' => array('video/x-msvideo', 'video/msvideo', 'video/avi', 'application/x-troff-msvideo'),
+		'bare' => 'text/html',
 		'bin' => array('application/macbinary', 'application/mac-binary', 'application/octet-stream', 'application/x-binary', 'application/x-macbinary'),
 		'bmp' => array('image/bmp', 'image/x-windows-bmp'),
 		'cer' => array('application/pkix-cert', 'application/x-x509-ca-cert'),
