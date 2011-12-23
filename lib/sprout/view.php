@@ -99,17 +99,17 @@ class View {
 	 * Checks to see if the requested property has an method of the same name and if so, utilizes it
 	 * to return its value. Otherwise, it returns the property's value as expected.
 	 *
-	 * @param string $varname The property requested
+	 * @param string $name The property requested
 	 * @return mixed The property value
 	 **/
-	public function __get($varname) {
-		switch ($varname) {
+	public function __get($name) {
+		switch ($name) {
 			case 'full_path':
-				$value = $this->$varname();
+				$value = $this->$name();
 			break;
 
 			default:
-				$value = $this->$varname;
+				$value = $this->$name;
 			break;
 		}
 
@@ -123,16 +123,16 @@ class View {
 	 * Checks to see if the property being set has a method of the same name for setting its value
 	 * and if so, uses it to set the value. Otherwise, it sets the property as expected.
 	 *
-	 * @param string $varname The name of the variable being set
+	 * @param string $name The name of the variable being set
 	 * @param mixed $value The value to set
 	 * @return void
 	 **/
-	public function __set($varname, $value) {
-		if (is_callable(array($this, $varname))) {
-			$value = $this->$varname($value);
+	public function __set($name, $value) {
+		if (is_callable(array($name, $name))) {
+			$value = $this->$name($value);
 		}
 
-		$this->$varname = $value;
+		$this->$name = $value;
 	}
 
 
