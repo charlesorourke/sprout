@@ -71,6 +71,14 @@ class Response {
 
 
 	/**
+	 * Content language header
+	 *
+	 * @var string
+	 */
+	public $language = 'en';
+
+
+	/**
 	 * Whether the response has been sent to the client
 	 *
 	 * @var boolean
@@ -222,14 +230,19 @@ class Response {
 		if ($this->_sent || headers_sent()) {
 			throw new Exception('Response already sent.');
 		} else {
-			$this->_sent = true;
+			$this->_set_headers();
 			echo $this->body;
+			$this->_sent = true;
 		}
 	}
 
 
 	/**
 	 * Sets the correct mime type based on the extension given
+	 *
+	 * If the response content type has not yet been specified, try to assign one based on known
+	 * extensions/formats. If the content type cannot be determined by set_content_type, the
+	 * determination of content type is done by the web server.
 	 *
 	 * @param string $extension The string file extension -- i.e. html, json, xml
 	 * @return void
@@ -241,10 +254,26 @@ class Response {
 			$this->content_type = $this->_mime_type['txt'];
 		}
 
+		// If the value for content type is an array, use its first element as the preferred value.
 		if (is_array($this->content_type) && count($this->content_type) > 0) {
 			$this->content_type = $this->content_type[0];
 		}
+	}
 
-		header('Content-type: '. $this->content_type . '; charset=' . $this->charset);
+
+	/**
+	 * Set headers for all defined properties
+	 *
+	 * @todo Make _set_headers more flexible in which headers it sets.
+	 * @return void
+	 */
+	private function _set_headers() {
+		if (!empty($this->language)) {
+			header('Content-Language: ' . $this->language);
+		}
+
+		if (!empty($this->content_type) && !empty($this->charset)) {
+			header('Content-Type: '. $this->content_type . '; charset=' . $this->charset);
+		}
 	}
 }
