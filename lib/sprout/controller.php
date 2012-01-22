@@ -70,6 +70,16 @@ class Controller {
 
 
 	/**
+	 * The layout template in which to render HTML content from controller actions.
+	 *
+	 * Only the base name of the view is required.
+	 *
+	 * @var string
+	 **/
+	protected $layout = 'application.html';
+
+
+	/**
 	 * Alias of the current controller base name
 	 *
 	 * For example, with a PagesController, $controller_name would be "pages".
@@ -167,6 +177,24 @@ class Controller {
 
 		// Run after_filters callback methods.
 		$this->_run_filters('after_filters');
+
+		// If format is html, embed the action content into the layout specified in $this->layout.
+		if ($this->view->format == 'html') {
+
+			$layout = new Layout($this->layout);
+
+			// Set the content property of the layout action's view template.
+			$layout->content = $this->content;
+
+			$layout->action_name = $this->action_name;
+			$layout->controller_name = $this->controller_name;
+
+			$layout->request = $this->request;
+			$layout->response = $this->response;
+
+			// Set the content property of the controller to the layout's view template markup.
+			$this->content = $layout->render($this->data);
+		}
 	}
 
 
@@ -179,12 +207,7 @@ class Controller {
 	 * @return void
 	 */
 	public function send_response() {
-		// If the response content type has not yet been specified, try to assign one based on known
-		// extensions/formats. If the content type cannot be determined by set_content_type, the
-		// determination of content type is done by the web server.
-		if (!isset($this->response->content_type)) {
-			$this->response->set_mime_type($this->params['format']);
-		}
+		$this->response->set_mime_type($this->params['format']);
 
 		if (!empty($this->content)) {
 			$this->response->body = $this->content;
