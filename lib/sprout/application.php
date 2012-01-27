@@ -222,15 +222,20 @@ class Application {
 			break;
 
 			case 'path':
-				$value = realpath('../../app_seed');
+				$value = realpath('..');
 			break;
 
 			case 'webroot':
-				$value = self::get('path') . DS . 'webroot';
+				$value = realpath(self::get('path') . '/webroot');
 			break;
 
 			case 'cache_dir':
-				$value = self::get('path') . DS . 'cache';
+				$value = self::get('temp_dir') . DS . self::get('basename') . '_cache';
+
+				// Create the cache directory for this app if it doesn't exist yet.
+				if (!is_dir($value)) {
+				    mkdir ($value, 0777, true);
+				}
 			break;
 
 			case 'temp_dir':

@@ -23,4 +23,41 @@
  * WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-require_once realpath(__DIR__ . '/lib/sprout/bootstrap.php');
+namespace Sprout;
+
+if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50300) {
+	die('Sprout requires PHP 5.3 or higher. The end.');
+}
+
+define('DS', DIRECTORY_SEPARATOR);
+
+require_once 'inflector.php';
+
+/**
+ * Autoloader for all Sprout framework classes
+ */
+spl_autoload_register(function($class) {
+	$app_path = realpath('..');
+	$lib_path = dirname(__DIR__);
+	if (strpos($class, '\\') !== false) {
+		$segments = array();
+		foreach (explode('\\', $class) as $segment) {
+			array_push($segments, Inflector::underscore($segment));
+		}
+		$class_path = $lib_path . DS . implode(DS, $segments) . '.php';
+	} else {
+		$class = Inflector::underscore($class);
+
+		// If we can't autoload this via namespace from the libraries, try to load it from one of
+		// the application's known directories.
+		if (stripos($class, 'controller') !== false) {
+			$class_path = $app_path . DS . 'controllers' . DS . $class . '.php';
+		} elseif (stripos($class, 'helper') !== false) {
+			$class_path = $app_path . DS . 'helpers' . DS . $class . '.php';
+		} else {
+			$class_path = $app_path . DS . 'models' . DS . $class . '.php';
+		}
+	}
+
+	if (file_exists($class_path)) require_once $class_path;
+});

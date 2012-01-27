@@ -37,11 +37,6 @@ Application::config(array(
 	// environments as necessary for your workflow.
 	'environment' => 'development',
 
-	// The path is the full path to your application directory. Setting the path as an application
-	// configuration option allows the framework to infer a few other things as well--like where to
-	// cache view files and where to look for models, controllers, and views.
-	'path' => realpath('../'),
-
 	// Another common configuration option is the location of the webroot. The Sprout default is to
 	// keep it inside the application directory but in production or staging environments, it is a
 	// good idea to keep your application code in a more secure location on the diek and the webroot
