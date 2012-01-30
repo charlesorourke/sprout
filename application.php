@@ -239,7 +239,7 @@ class Application {
 			break;
 
 			case 'temp_dir':
-				$value = sys_get_temp_dir();
+				$value = rtrim(sys_get_temp_dir(), DS);
 			break;
 
 			case 'connections':
