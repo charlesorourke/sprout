@@ -57,6 +57,14 @@ class Layout extends View {
 
 
 	/**
+	 * The page title; defaults to the current action name
+	 *
+	 * @var string
+	 **/
+	protected $title;
+
+
+	/**
 	 * The request object that got us here
 	 *
 	 * @var Request

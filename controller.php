@@ -98,6 +98,14 @@ class Controller {
 
 
 	/**
+	 * The page title; defaults to the current action name
+	 *
+	 * @var string
+	 **/
+	protected $title;
+
+
+	/**
 	 * Alias of the current request params
 	 *
 	 * @var string
@@ -126,6 +134,8 @@ class Controller {
 		$controller->params = &$request->params;
 		$controller->controller_name = &$request->params['controller'];
 		$controller->action_name = &$request->params['action'];
+
+		$controller->title = Inflector::titleize($controller->action_name);
 
 		// Set the default view template based on route params - this can be overridden in the
 		// controller action by setting $this->view->template = 'some_other_template.ext'; with .ext
@@ -185,6 +195,7 @@ class Controller {
 
 			// Set the content property of the layout action's view template.
 			$layout->content = $this->content;
+			$layout->title = $this->title;
 
 			$layout->action_name = $this->action_name;
 			$layout->controller_name = $this->controller_name;
