@@ -228,7 +228,7 @@ class Response {
 	 */
 	public function send() {
 		if ($this->_sent || headers_sent()) {
-			throw new Exception('Response already sent.');
+			throw new \Exception('Response already sent.');
 		} else {
 			$this->_set_headers();
 			echo $this->body;

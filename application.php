@@ -31,7 +31,7 @@ namespace Sprout;
 * Any application level configuration option can be overridden by an Environment configuration
 * option. The Application class defines properties for all configuration options required by Sprout.
 * Developers can define additional configuration options required for their applications. Developer
-* defined appliction configuration options are maintained separately in an associative array but
+* defined application configuration options are maintained separately in an associative array but
 * behave like standard configuration options otherwise.
 */
 class Application {
@@ -102,14 +102,14 @@ class Application {
 
 
 	/**
-	 * Define and return the appliction/environment configuration options
+	 * Define and return the application/environment configuration options
 	 *
 	 * @param array $options An associative array of configuration options
 	 * @return array
 	 **/
 	public static function config($config = null) {
 		if ($config && is_array($config)) {
-			// Loop through the array and attempt to set each of it's keys to a defined property or
+			// Loop through the array and attempt to set each of its keys to a defined property or
 			// add it to the user defined options array.
 			foreach ($config as $option => $value) {
 				if (property_exists(get_class(), $option)) {
